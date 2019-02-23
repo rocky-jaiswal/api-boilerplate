@@ -2,7 +2,7 @@ package de.rockyj.configuration
 
 import com.uchuhimo.konf.Config
 import com.uchuhimo.konf.ConfigSpec
-import java.io.File
+import java.io.InputStream
 
 object ApplicationConfiguration : ConfigSpec("server") {
     val port by required<Int>()
@@ -11,11 +11,11 @@ object ApplicationConfiguration : ConfigSpec("server") {
 object Configuration {
     fun readConfiguration(): Config {
         val content = readConfigFile()
-        return  Config{ addSpec(ApplicationConfiguration) }.from.yaml.file(content)
+        return  Config{ addSpec(ApplicationConfiguration) }.from.yaml.inputStream(content)
     }
 
-    private fun readConfigFile(): File {
+    private fun readConfigFile(): InputStream {
         val environment = System.getProperty("application.environment")
-        return File(this::class.java.classLoader.getResource("config_$environment.yaml").file)
+        return this::class.java.classLoader.getResource("conf/config_$environment.yaml").openStream()
     }
 }

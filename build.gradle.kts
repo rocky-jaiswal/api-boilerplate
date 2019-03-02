@@ -35,10 +35,16 @@ dependencies {
     implementation("org.slf4j:slf4j-simple:1.7.25")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.9.8")
     implementation(group = "com.uchuhimo", name = "konf", version = "0.13.1")
+    implementation(group = "commons-codec", name = "commons-codec", version = "1.12")
+    implementation(group = "org.yaml", name = "snakeyaml", version = "1.21")
+
 }
 
 application {
     // Define the main class for the application.
     mainClassName = "de.rockyj.AppKt"
-    applicationDefaultJvmArgs = listOf("-Dapplication.environment=${System.getProperty("application.environment")}")
+    applicationDefaultJvmArgs = listOf(
+            "-Dapplication.environment=${System.getProperty("application.environment")}",
+            "-Dapplication.key=${System.getProperty("application.key")}",
+            "-Dapplication.iv=${System.getProperty("application.iv")}")
 }

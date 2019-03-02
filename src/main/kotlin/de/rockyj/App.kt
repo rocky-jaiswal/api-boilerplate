@@ -2,6 +2,7 @@ package de.rockyj
 
 import de.rockyj.configuration.Configuration
 import de.rockyj.configuration.ApplicationConfiguration
+import de.rockyj.configuration.Secret
 import de.rockyj.handlers.RootHandler
 import io.javalin.Javalin
 
@@ -13,6 +14,7 @@ class App {
 }
 
 fun main() {
+    println(Secret.decryptSecrets())
     val config = Configuration.readConfiguration()
     val app = Javalin.create().start(config[ApplicationConfiguration.port])
 

@@ -1,3 +1,5 @@
+#!/usr/bin/ruby
+
 require 'securerandom'
 require 'openssl'
 require 'base64'

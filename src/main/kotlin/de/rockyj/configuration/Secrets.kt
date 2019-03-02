@@ -22,7 +22,6 @@ object Secrets {
     }
 
     fun decrypt(): Map<String, String>? {
-        println(environment)
         val textYaml = cipher.doFinal(Base64.decodeBase64(byteArray))
         return Yaml().load<Map<String, Map<String, String>>>(String(textYaml))[environment]
     }

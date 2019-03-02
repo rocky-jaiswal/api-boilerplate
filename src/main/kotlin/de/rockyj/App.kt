@@ -14,7 +14,7 @@ class App {
 }
 
 fun main() {
-    println(Secrets.decrypt())
+    println(Secrets.decrypt()?.get("password"))
     val config = Configuration.readConfiguration()
     val app = Javalin.create().start(config[ApplicationConfiguration.port])
 

@@ -2,6 +2,7 @@ package de.rockyj.configuration
 
 import org.apache.commons.codec.binary.Base64
 import org.yaml.snakeyaml.Yaml
+import java.lang.Exception
 import javax.crypto.Cipher
 import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
@@ -21,9 +22,13 @@ object Secrets {
         cipher.init(Cipher.DECRYPT_MODE, keySpec, iv)
     }
 
-    fun decrypt(): Map<String, String>? {
+    private fun decrypt(): Map<String, String>? {
         val textYaml = cipher.doFinal(Base64.decodeBase64(byteArray))
         return Yaml().load<Map<String, Map<String, String>>>(String(textYaml))[environment]
+    }
+
+    fun get(key: String): String {
+        return decrypt()?.get(key) ?: throw Exception("Secret $key not found")
     }
 
 }

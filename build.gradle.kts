@@ -20,6 +20,7 @@ repositories {
     // Use jcenter for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
+    mavenCentral()
 }
 
 tasks.withType<KotlinCompile> {
@@ -59,6 +60,9 @@ dependencies {
     implementation("org.jdbi:jdbi3-kotlin:3.6.0")
     implementation("org.jdbi:jdbi3-kotlin-sqlobject:3.6.0")
     implementation("org.jdbi:jdbi3-postgres:3.6.0")
+
+    // DB Migration
+    implementation("org.flywaydb:flyway-core:5.2.4")
 }
 
 application {

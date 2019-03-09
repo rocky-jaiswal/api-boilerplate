@@ -7,6 +7,7 @@ import de.rockyj.repositories.DB
 import de.rockyj.repositories.UserRepository
 import de.rockyj.services.UserService
 import io.javalin.Javalin
+import org.flywaydb.core.Flyway
 import org.koin.dsl.module.module
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.StandAloneContext
@@ -25,6 +26,10 @@ val mainModule = module {
 
 class App: KoinComponent {
     fun run(app: Javalin) {
+        // Migrate the DB
+        val dataSource: DataSource = get()
+        Flyway.configure().dataSource(dataSource.get()).load().migrate()
+
         val userHandler: UsersHandler = get()
         val rootHandler: RootHandler = get()
 

@@ -10,7 +10,6 @@ internal interface UserDao {
 }
 
 class UserRepository(private val db: DB) {
-
     fun getAllUsers(): List<User> {
         val dao = db.getJdbi().onDemand<UserDao>()
         return dao.listUsers()

@@ -1,22 +1,47 @@
 package de.rockyj
 
-import de.rockyj.configuration.Configuration
+import de.rockyj.configuration.*
 import de.rockyj.handlers.RootHandler
 import de.rockyj.handlers.UsersHandler
+import de.rockyj.repositories.DB
+import de.rockyj.repositories.UserRepository
+import de.rockyj.services.UserService
 import io.javalin.Javalin
+import org.koin.dsl.module.module
+import org.koin.standalone.KoinComponent
+import org.koin.standalone.StandAloneContext
+import org.koin.standalone.get
 
-class App {
-    val greeting: String
-        get() {
-            return "Hello world!"
-        }
+val mainModule = module {
+    single { Configuration() as GenericConfiguration }
+    single { Secrets() as StringConfiguration }
+    single { DataSource(get(), get()) }
+    single { DB(get()) }
+    single { UserRepository(get()) }
+    single { UserService(get()) }
+    single { UsersHandler(get()) }
+    single { RootHandler() }
+}
+
+class App: KoinComponent {
+    fun run(app: Javalin) {
+        val userHandler: UsersHandler = get()
+        val rootHandler: RootHandler = get()
+
+        // Routes
+        app.get("/") { rootHandler.get(it) }
+        app.get("/users") { userHandler.index(it) }
+    }
 }
 
 fun main() {
-    val port: Int = Configuration.get("port")
+    // Start DI
+    StandAloneContext.startKoin(listOf(mainModule))
+
+    // Javalin setup
+    val port: Int = Configuration().get("port")
     val app = Javalin.create().start(port)
 
-    // Routes
-    app.get("/") { RootHandler.get(it) }
-    app.get("/users") { UsersHandler.index(it) }
+    // Run the app
+    App().run(app)
 }

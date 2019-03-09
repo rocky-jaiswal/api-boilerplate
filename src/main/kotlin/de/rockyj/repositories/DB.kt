@@ -3,8 +3,11 @@ package de.rockyj.repositories
 import de.rockyj.configuration.DataSource
 import org.jdbi.v3.core.Jdbi
 
-fun getJdbi(): Jdbi {
-    val jdbi = Jdbi.create(DataSource.get())
-    jdbi.installPlugins()
-    return jdbi
+class DB(private val dataSource: DataSource) {
+
+    fun getJdbi(): Jdbi {
+        val jdbi = Jdbi.create(dataSource.get())
+        jdbi.installPlugins()
+        return jdbi
+    }
 }

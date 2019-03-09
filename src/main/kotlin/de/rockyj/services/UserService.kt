@@ -3,8 +3,8 @@ package de.rockyj.services
 import de.rockyj.models.User
 import de.rockyj.repositories.UserRepository
 
-object UserService {
+class UserService(private val userRepository: UserRepository) {
     fun getAllUsers(): List<User> {
-        return UserRepository.getAllUsers()
+        return userRepository.getAllUsers()
     }
 }

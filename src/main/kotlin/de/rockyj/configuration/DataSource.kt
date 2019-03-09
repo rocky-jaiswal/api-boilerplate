@@ -2,19 +2,18 @@ package de.rockyj.configuration
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
-import java.lang.Exception
 import javax.sql.DataSource
 
-object DataSource {
+class DataSource(private val configuration: GenericConfiguration, private val secrets: StringConfiguration) {
     private val config = HikariConfig()
-    private val dbURL = Secrets.get("dbURL")
+    private val dbURL = secrets.get("dbURL")
     private var dataSource: DataSource
 
     init {
         config.jdbcUrl = dbURL
-        config.username = Secrets.get("username")
-        config.password = Secrets.get("password")
-        config.maximumPoolSize = Configuration.get("maxPoolSize")
+        config.username = secrets.get("username")
+        config.password = secrets.get("password")
+        config.maximumPoolSize = configuration.get("maxPoolSize")
         dataSource = HikariDataSource(config)
     }
 

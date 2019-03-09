@@ -41,9 +41,16 @@ dependencies {
     implementation("io.javalin:javalin:2.6.0")
     implementation("org.slf4j:slf4j-simple:1.7.25")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.9.8")
+
+    // For config
     implementation("com.uchuhimo:konf:0.13.1")
     implementation("commons-codec:commons-codec:1.12")
     implementation("org.yaml:snakeyaml:1.21")
+
+    // DI
+    implementation("org.koin:koin-core:1.0.2")
+
+    // DB Stuff
     implementation("org.postgresql:postgresql:42.2.5")
     implementation("com.zaxxer:HikariCP:3.3.0")
     implementation("org.jdbi:jdbi3-core:3.6.0")

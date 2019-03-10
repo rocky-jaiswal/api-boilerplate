@@ -7,20 +7,19 @@ import org.testcontainers.containers.PostgreSQLContainer
 
 class KPostgreSQLContainer() : PostgreSQLContainer<KPostgreSQLContainer>()
 
-object DBContainer {
+object TestDBContainer {
     val postgresqlContainer = KPostgreSQLContainer()
 }
 
 class DBExtension : AfterEachCallback, BeforeEachCallback {
 
-
     @Throws(Exception::class)
     override fun beforeEach(context: ExtensionContext) {
-        DBContainer.postgresqlContainer.start()
+        TestDBContainer.postgresqlContainer.start()
     }
 
     @Throws(Exception::class)
     override fun afterEach(context: ExtensionContext) {
-        DBContainer.postgresqlContainer.stop()
+        TestDBContainer.postgresqlContainer.stop()
     }
 }

@@ -31,11 +31,8 @@ dependencies {
     // Use the Kotlin JDK 8 standard library.
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
-    // Use the Kotlin test library.
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
-
-    // Use the Kotlin JUnit integration.
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+    // Use junit 5
+    testImplementation("org.junit.jupiter:junit-jupiter:5.4.0")
 
     // App dependencies
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.3.20")
@@ -63,6 +60,9 @@ dependencies {
 
     // DB Migration
     implementation("org.flywaydb:flyway-core:5.2.4")
+
+    // DB Testing
+    testImplementation("org.testcontainers:postgresql:1.10.6")
 }
 
 application {
@@ -72,4 +72,11 @@ application {
             "-Dapplication.environment=${System.getProperty("application.environment")}",
             "-Dapplication.key=${System.getProperty("application.key")}",
             "-Dapplication.iv=${System.getProperty("application.iv")}")
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
 }

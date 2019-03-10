@@ -28,7 +28,7 @@ class App: KoinComponent {
     fun run(app: Javalin) {
         // Migrate the DB
         val dataSource: DataSource = get()
-        Flyway.configure().dataSource(dataSource.get()).load().migrate()
+        Flyway.configure().dataSource(dataSource.dataSource).load().migrate()
 
         val userHandler: UsersHandler = get()
         val rootHandler: RootHandler = get()

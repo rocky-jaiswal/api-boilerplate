@@ -12,6 +12,8 @@ plugins {
 
     id("com.github.johnrengelman.shadow").version("4.0.4")
 
+    id("org.jetbrains.kotlin.plugin.jpa").version("1.3.21")
+
     // Apply the application plugin to add support for building a CLI application.
     application
 }
@@ -51,12 +53,7 @@ dependencies {
     // DB Stuff
     implementation("org.postgresql:postgresql:42.2.5")
     implementation("com.zaxxer:HikariCP:3.3.0")
-    implementation("org.jdbi:jdbi3-core:3.6.0")
-    implementation("org.jdbi:jdbi3-sqlobject:3.6.0")
-    implementation("org.jdbi:jdbi3-jodatime2:3.6.0")
-    implementation("org.jdbi:jdbi3-kotlin:3.6.0")
-    implementation("org.jdbi:jdbi3-kotlin-sqlobject:3.6.0")
-    implementation("org.jdbi:jdbi3-postgres:3.6.0")
+    implementation("org.hibernate:hibernate-core:5.4.1.Final")
 
     // DB Migration
     implementation("org.flywaydb:flyway-core:5.2.4")

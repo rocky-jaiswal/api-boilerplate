@@ -1,13 +1,27 @@
 package de.rockyj.repositories
 
 import de.rockyj.configuration.DataSource
-import org.jdbi.v3.core.Jdbi
+import javax.persistence.EntityManager
+import javax.persistence.Persistence
 
 class DB(private val dataSource: DataSource) {
 
-    fun getJdbi(): Jdbi {
-        val jdbi = Jdbi.create(dataSource.dataSource)
-        jdbi.installPlugins()
-        return jdbi
+    private var ref: EntityManager? = null
+
+    fun getEntityManager(): EntityManager {
+        val hikariDataSource = dataSource.getHikariDataSource()
+        val props = mapOf<String, Any>(
+                "javax.persistence.jdbc.user" to hikariDataSource.username,
+                "javax.persistence.jdbc.password" to hikariDataSource.password,
+                "javax.persistence.jdbc.url" to hikariDataSource.jdbcUrl
+        )
+
+        return if (ref == null) {
+            val emf = Persistence.createEntityManagerFactory("de.rockyj.api-boilerplate", props)
+            ref = emf.createEntityManager()
+            ref!!
+        } else {
+            ref!!
+        }
     }
 }

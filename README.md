@@ -24,7 +24,7 @@ Simple Javalin + Kotlin based API boilerplate. Please note that this project is 
 - JSON + XML parsing / generation
 - HTTP client (for service level integration) or maybe Prot. Buffer / gRPC
 - Request param validation (JSON body validation)
-- Logging + log format customization
+- Logging + log format customization ✔️
 - DB connection pooling ✔️
 - DB seeding / data loading
 - ORM / Query builder ✔️

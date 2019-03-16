@@ -25,5 +25,4 @@ class DataSource(private val configuration: GenericConfiguration, private val se
             ref.get()!!
         }
     }
-
 }

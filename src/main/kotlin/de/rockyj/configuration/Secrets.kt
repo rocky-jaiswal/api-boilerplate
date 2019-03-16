@@ -7,10 +7,10 @@ import javax.crypto.Cipher
 import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
 
-class Secrets: StringConfiguration {
+class Secrets : StringConfiguration {
     private val environment = System.getProperty("application.environment")
     private val keyBytes = System.getProperty("application.key").toByteArray()
-    private val ivBytes  = System.getProperty("application.iv").toByteArray()
+    private val ivBytes = System.getProperty("application.iv").toByteArray()
 
     private val byteArray = this::class.java.classLoader.getResource("secrets/secrets.enc").readBytes()
 
@@ -30,6 +30,4 @@ class Secrets: StringConfiguration {
     override fun get(key: String): String {
         return decrypt()?.get(key) ?: throw Exception("Secret $key not found")
     }
-
 }
-

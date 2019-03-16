@@ -9,7 +9,7 @@ object ApplicationConfiguration : ConfigSpec("server") {
     val maxPoolSize by required<Int>()
 }
 
-class Configuration: GenericConfiguration {
+class Configuration : GenericConfiguration {
 
     var content: InputStream
 
@@ -19,7 +19,7 @@ class Configuration: GenericConfiguration {
     }
 
     private fun readConfiguration(): Config {
-        return Config{ addSpec(ApplicationConfiguration) }.from.yaml.inputStream(content)
+        return Config { addSpec(ApplicationConfiguration) }.from.yaml.inputStream(content)
     }
 
     override fun get(key: String): Any {

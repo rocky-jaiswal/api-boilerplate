@@ -1,6 +1,10 @@
 package de.rockyj
 
-import de.rockyj.configuration.*
+import de.rockyj.configuration.Configuration
+import de.rockyj.configuration.GenericConfiguration
+import de.rockyj.configuration.Secrets
+import de.rockyj.configuration.StringConfiguration
+import de.rockyj.configuration.DataSource
 import de.rockyj.handlers.RootHandler
 import de.rockyj.handlers.UsersHandler
 import de.rockyj.repositories.DB
@@ -24,7 +28,7 @@ val mainModule = module {
     single { RootHandler() }
 }
 
-class App: KoinComponent {
+class App : KoinComponent {
     fun run(app: Javalin) {
         // Migrate the DB
         val dataSource: DataSource = get()

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
 @ExtendWith(DBExtension::class)
-class UserRepositoryTest: DBTest() {
+class UserRepositoryTest : DBTest() {
 
     @Test
     fun `Basic DB Select`() {

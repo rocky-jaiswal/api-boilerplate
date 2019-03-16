@@ -20,24 +20,23 @@ open class DBTest {
         val password = TestDBContainer.postgresqlContainer.password
         val maxPoolSize = 10
 
-        val genericConfiguration: GenericConfiguration = object: GenericConfiguration {
+        val genericConfiguration: GenericConfiguration = object : GenericConfiguration {
             override fun get(key: String): Any {
-                return when(key) {
+                return when (key) {
                     "maxPoolSize" -> maxPoolSize
                     else -> 10
                 }
             }
         }
-        val secretsConfiguration: StringConfiguration = object: StringConfiguration {
+        val secretsConfiguration: StringConfiguration = object : StringConfiguration {
             override fun get(key: String): String {
-                return when(key) {
+                return when (key) {
                     "dbURL" -> jdbcURL
                     "username" -> username
                     "password" -> password
                     else -> ""
                 }
             }
-
         }
 
         dataSource = DataSource(genericConfiguration, secretsConfiguration)

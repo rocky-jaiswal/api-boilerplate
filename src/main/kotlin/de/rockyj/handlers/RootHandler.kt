@@ -11,4 +11,3 @@ class RootHandler {
         return ctx.json(mapOf("message" to "all ok"))
     }
 }
-

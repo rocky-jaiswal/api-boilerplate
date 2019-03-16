@@ -5,7 +5,6 @@ import org.jdbi.v3.sqlobject.kotlin.onDemand
 import org.jdbi.v3.sqlobject.statement.SqlQuery
 import org.jdbi.v3.sqlobject.statement.SqlUpdate
 
-
 internal interface UserDao {
     @SqlQuery("select * from users")
     fun listUsers(): List<User>

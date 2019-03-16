@@ -7,7 +7,7 @@ import org.jdbi.v3.sqlobject.statement.SqlUpdate
 
 
 internal interface UserDao {
-    @SqlQuery("SELECT * FROM users")
+    @SqlQuery("select * from users")
     fun listUsers(): List<User>
 
     @SqlUpdate("insert into users (name) values (?)")

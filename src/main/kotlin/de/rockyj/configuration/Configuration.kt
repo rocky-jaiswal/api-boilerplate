@@ -22,7 +22,7 @@ class Configuration: GenericConfiguration {
         return Config{ addSpec(ApplicationConfiguration) }.from.yaml.inputStream(content)
     }
 
-    override fun <T>get(key: String): T {
+    override fun get(key: String): Any {
         val config = readConfiguration()
         return config["server.$key"]
     }

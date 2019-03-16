@@ -13,7 +13,7 @@ class DataSource(private val configuration: GenericConfiguration, private val se
         config.jdbcUrl = dbURL
         config.username = secrets.get("username")
         config.password = secrets.get("password")
-        config.maximumPoolSize = configuration.get("maxPoolSize")
+        config.maximumPoolSize = configuration.get("maxPoolSize") as Int
     }
 
     fun getHikariDataSource(): HikariDataSource {

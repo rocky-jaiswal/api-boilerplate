@@ -44,7 +44,7 @@ fun main() {
     StandAloneContext.startKoin(listOf(mainModule))
 
     // Javalin setup
-    val port: Int = Configuration().get("port")
+    val port: Int = Configuration().get("port") as Int
     val app = Javalin.create().start(port)
 
     // Run the app

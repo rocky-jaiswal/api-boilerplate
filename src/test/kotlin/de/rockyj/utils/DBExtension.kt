@@ -1,25 +1,23 @@
 package de.rockyj.utils
 
-import org.junit.jupiter.api.extension.BeforeEachCallback
-import org.junit.jupiter.api.extension.AfterEachCallback
-import org.junit.jupiter.api.extension.ExtensionContext
+import org.junit.jupiter.api.extension.*
 import org.testcontainers.containers.PostgreSQLContainer
 
-class KPostgreSQLContainer() : PostgreSQLContainer<KPostgreSQLContainer>()
+class KPostgreSQLContainer : PostgreSQLContainer<KPostgreSQLContainer>()
 
 object TestDBContainer {
     val postgresqlContainer = KPostgreSQLContainer()
 }
 
-class DBExtension : AfterEachCallback, BeforeEachCallback {
+class DBExtension : AfterAllCallback, BeforeAllCallback {
 
     @Throws(Exception::class)
-    override fun beforeEach(context: ExtensionContext) {
+    override fun beforeAll(context: ExtensionContext){
         TestDBContainer.postgresqlContainer.start()
     }
 
     @Throws(Exception::class)
-    override fun afterEach(context: ExtensionContext) {
+    override fun afterAll(context: ExtensionContext) {
         TestDBContainer.postgresqlContainer.stop()
     }
 }

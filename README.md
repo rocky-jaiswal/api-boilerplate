@@ -4,19 +4,19 @@ Simple Javalin + Kotlin based API boilerplate. Please note that this project is 
 
 ## Checklist
 
-✔️ Restful (HTTP + JSON with correct HTTP methods) / GraphQL based
-✔️ Build + dependency management tool (e.g. npm, gradle)
-✔️ Testing
-  ✔️ Unit
+- Restful (HTTP + JSON with correct HTTP methods) / GraphQL based ✔️
+- Build + dependency management tool (e.g. npm, gradle) ✔️
+- Testing
+  - Unit ✔️
     - Usually needs a mocking library
-  ✔️ Integration (request / db level)
+  - Integration (request / db level) ✔️ 
   - Contract / Pact
-  ✔️ CI testing with test DB etc.
-  ✔️ Test DB should be cleaned after each (unit) test run
+  - CI testing with test DB etc. ✔️
+  - Test DB should be cleaned after each (unit) test run ✔️
 - Linting / style check
-✔️ Multi env. configuration
+- Multi env. configuration ✔️
   - Local, QA, Production
-✔️ Secrets management
+- Secrets management ✔️
   - Also may vary depending on env.
 - CORS in development
   - Also may vary depending on env.
@@ -25,14 +25,14 @@ Simple Javalin + Kotlin based API boilerplate. Please note that this project is 
 - HTTP client (for service level integration) or maybe Prot. Buffer / gRPC
 - Request param validation (JSON body validation)
 - Logging + log format customization
-✔️ DB connection pooling
+- DB connection pooling ✔️
 - DB seeding / data loading
-✔️ ORM / Query builder
-✔️ DB migration
+- ORM / Query builder ✔️
+- DB migration ✔️
 - Error handling + reporting
 - CI / CD
 - Code quality analysis / measurement
-✔️ Dependency Injection (if applicable, for better testable code)
+- Dependency Injection (if applicable, for better testable code) ✔️
 - Authenticated paths / Non-Authenticated paths
 - JWT Authentication
 - Authorization

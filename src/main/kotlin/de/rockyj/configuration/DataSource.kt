@@ -2,13 +2,12 @@ package de.rockyj.configuration
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
-import javax.sql.DataSource
+import java.util.concurrent.atomic.AtomicReference
 
 class DataSource(private val configuration: GenericConfiguration, private val secrets: StringConfiguration) {
     private val config = HikariConfig()
     private val dbURL = secrets.get("dbURL")
-    val dataSource: DataSource
-        get() = HikariDataSource(config)
+    private var ref: AtomicReference<HikariDataSource?> = AtomicReference()
 
     init {
         config.jdbcUrl = dbURL
@@ -16,4 +15,15 @@ class DataSource(private val configuration: GenericConfiguration, private val se
         config.password = secrets.get("password")
         config.maximumPoolSize = configuration.get("maxPoolSize")
     }
+
+    fun getHikariDataSource(): HikariDataSource {
+        return if (ref.get() == null) {
+            ref.updateAndGet {
+                HikariDataSource(config)
+            }!!
+        } else {
+            ref.get()!!
+        }
+    }
+
 }

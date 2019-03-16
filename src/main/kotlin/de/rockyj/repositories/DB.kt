@@ -1,12 +1,13 @@
 package de.rockyj.repositories
 
 import de.rockyj.configuration.DataSource
+import java.util.concurrent.atomic.AtomicReference
 import javax.persistence.EntityManager
 import javax.persistence.Persistence
 
 class DB(private val dataSource: DataSource) {
 
-    private var ref: EntityManager? = null
+    private var ref: AtomicReference<EntityManager?> = AtomicReference()
 
     fun getEntityManager(): EntityManager {
         val hikariDataSource = dataSource.getHikariDataSource()
@@ -16,12 +17,13 @@ class DB(private val dataSource: DataSource) {
                 "javax.persistence.jdbc.url" to hikariDataSource.jdbcUrl
         )
 
-        return if (ref == null) {
-            val emf = Persistence.createEntityManagerFactory("de.rockyj.api-boilerplate", props)
-            ref = emf.createEntityManager()
-            ref!!
+        return if (ref.get() == null) {
+            ref.updateAndGet {
+                val emf = Persistence.createEntityManagerFactory("de.rockyj.api-boilerplate", props)
+                emf.createEntityManager()
+            }!!
         } else {
-            ref!!
+            ref.get()!!
         }
     }
 }

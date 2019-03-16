@@ -2,11 +2,12 @@ package de.rockyj.configuration
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
+import java.util.concurrent.atomic.AtomicReference
 
 class DataSource(private val configuration: GenericConfiguration, private val secrets: StringConfiguration) {
     private val config = HikariConfig()
     private val dbURL = secrets.get("dbURL")
-    private var ref: HikariDataSource? = null
+    private var ref: AtomicReference<HikariDataSource?> = AtomicReference()
 
     init {
         config.jdbcUrl = dbURL
@@ -16,11 +17,12 @@ class DataSource(private val configuration: GenericConfiguration, private val se
     }
 
     fun getHikariDataSource(): HikariDataSource {
-        return if (ref == null) {
-            ref = HikariDataSource(config)
-            ref!!
+        return if (ref.get() == null) {
+            ref.updateAndGet {
+                HikariDataSource(config)
+            }!!
         } else {
-            ref!!
+            ref.get()!!
         }
     }
 

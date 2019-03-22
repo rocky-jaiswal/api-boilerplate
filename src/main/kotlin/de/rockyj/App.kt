@@ -1,10 +1,6 @@
 package de.rockyj
 
-import de.rockyj.configuration.Configuration
-import de.rockyj.configuration.GenericConfiguration
-import de.rockyj.configuration.Secrets
-import de.rockyj.configuration.StringConfiguration
-import de.rockyj.configuration.DataSource
+import de.rockyj.configuration.*
 import de.rockyj.handlers.RootHandler
 import de.rockyj.handlers.UsersHandler
 import de.rockyj.repositories.DB
@@ -26,6 +22,7 @@ val mainModule = module {
     single { UserService(get()) }
     single { UsersHandler(get()) }
     single { RootHandler() }
+    single { Router() }
 }
 
 class App : KoinComponent {
@@ -34,12 +31,8 @@ class App : KoinComponent {
         val dataSource: DataSource = get()
         Flyway.configure().dataSource(dataSource.getHikariDataSource()).load().migrate()
 
-        val userHandler: UsersHandler = get()
-        val rootHandler: RootHandler = get()
-
-        // Routes
-        app.get("/") { rootHandler.get(it) }
-        app.get("/users") { userHandler.index(it) }
+        val router: Router = get()
+        router.setup(app)
     }
 }
 

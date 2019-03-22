@@ -16,6 +16,7 @@ class DataSource(private val configuration: GenericConfiguration, private val se
         config.maximumPoolSize = configuration.get("maxPoolSize") as Int
     }
 
+    @Synchronized
     fun getHikariDataSource(): HikariDataSource {
         return if (ref.get() == null) {
             ref.updateAndGet {

@@ -14,9 +14,9 @@ import org.koin.standalone.StandAloneContext
 import org.koin.standalone.get
 
 val mainModule = module {
-    single { Configuration() as GenericConfiguration }
-    single { Secrets() as StringConfiguration }
-    single { DataSource(get(), get()) }
+    single<GenericConfiguration>("configuration") { Configuration()  }
+    single<GenericConfiguration>("secrets") { Secrets() }
+    single { DataSource(get(name="configuration"), get(name="secrets")) }
     single { DB(get()) }
     single { UserRepository(get()) }
     single { UserService(get()) }
@@ -41,7 +41,7 @@ fun main() {
     StandAloneContext.startKoin(listOf(mainModule))
 
     // Javalin setup
-    val port: Int = Configuration().get("port") as Int
+    val port = Configuration().get("port") as Int
     val app = Javalin.create().start(port)
 
     // Run the app

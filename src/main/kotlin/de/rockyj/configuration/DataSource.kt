@@ -4,15 +4,15 @@ import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import java.util.concurrent.atomic.AtomicReference
 
-class DataSource(private val configuration: GenericConfiguration, private val secrets: StringConfiguration) {
+class DataSource(configuration: GenericConfiguration, secrets: GenericConfiguration) {
     private val config = HikariConfig()
-    private val dbURL = secrets.get("dbURL")
+    private val dbURL = secrets.get<String>("dbURL")
     private var ref: AtomicReference<HikariDataSource?> = AtomicReference()
 
     init {
         config.jdbcUrl = dbURL
-        config.username = secrets.get("username")
-        config.password = secrets.get("password")
+        config.username = secrets.get<String>("username")
+        config.password = secrets.get<String>("password")
         config.maximumPoolSize = configuration.get("maxPoolSize") as Int
     }
 

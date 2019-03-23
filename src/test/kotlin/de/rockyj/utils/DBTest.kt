@@ -2,7 +2,6 @@ package de.rockyj.utils
 
 import de.rockyj.configuration.DataSource
 import de.rockyj.configuration.GenericConfiguration
-import de.rockyj.configuration.StringConfiguration
 import org.flywaydb.core.Flyway
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -21,20 +20,20 @@ open class DBTest {
         val maxPoolSize = 10
 
         val genericConfiguration: GenericConfiguration = object : GenericConfiguration {
-            override fun get(key: String): Any {
+            override fun <T> get(key: String): T {
                 return when (key) {
-                    "maxPoolSize" -> maxPoolSize
-                    else -> 10
+                    "maxPoolSize" -> maxPoolSize as T
+                    else -> 10 as T
                 }
             }
         }
-        val secretsConfiguration: StringConfiguration = object : StringConfiguration {
-            override fun get(key: String): String {
+        val secretsConfiguration: GenericConfiguration = object : GenericConfiguration {
+            override fun <T> get(key: String): T {
                 return when (key) {
-                    "dbURL" -> jdbcURL
-                    "username" -> username
-                    "password" -> password
-                    else -> ""
+                    "dbURL" -> jdbcURL as T
+                    "username" -> username as T
+                    "password" -> password as T
+                    else -> "" as T
                 }
             }
         }

@@ -7,7 +7,7 @@ import javax.crypto.Cipher
 import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
 
-class Secrets : StringConfiguration {
+class Secrets : GenericConfiguration {
     private val environment = System.getProperty("application.environment")
     private val keyBytes = System.getProperty("application.key").toByteArray()
     private val ivBytes = System.getProperty("application.iv").toByteArray()
@@ -27,7 +27,7 @@ class Secrets : StringConfiguration {
         return Yaml().load<Map<String, Map<String, String>>>(String(textYaml))[environment]
     }
 
-    override fun get(key: String): String {
-        return decrypt()?.get(key) ?: throw Exception("Secret $key not found")
+    override fun <T> get(key: String): T {
+        return decrypt()?.get(key) as T ?: throw Exception("Secret $key not found")
     }
 }

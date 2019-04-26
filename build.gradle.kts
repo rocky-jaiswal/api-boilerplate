@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin on the JVM.
-    id("org.jetbrains.kotlin.jvm").version("1.3.20")
+    id("org.jetbrains.kotlin.jvm").version("1.3.30")
 
     id("com.github.johnrengelman.shadow").version("4.0.4")
 
@@ -29,7 +29,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.4.0")
 
     // App dependencies
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.3.20")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.3.30")
     implementation("io.javalin:javalin:2.6.0")
     implementation("org.slf4j:slf4j-simple:1.7.25")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.9.8")
@@ -54,7 +54,7 @@ dependencies {
     implementation("org.jdbi:jdbi3-jodatime2:3.6.0")
     implementation("org.jdbi:jdbi3-kotlin:3.6.0")
     implementation("org.jdbi:jdbi3-kotlin-sqlobject:3.6.0")
-    implementation("org.jdbi:jdbi3-postgres:3.6.0")
+    implementation("org.jdbi:jdbi3-sqlite:3.6.0")
 
     // DB Migration
     implementation("org.flywaydb:flyway-core:5.2.4")

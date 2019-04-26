@@ -11,8 +11,6 @@ plugins {
 }
 
 repositories {
-    // Use jcenter for resolving your dependencies.
-    // You can declare any Maven/Ivy/file repository here.
     jcenter()
     mavenCentral()
 }
@@ -28,9 +26,11 @@ dependencies {
     // Use junit 5
     testImplementation("org.junit.jupiter:junit-jupiter:5.4.0")
 
-    // App dependencies
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.3.30")
+    // Web framework
     implementation("io.javalin:javalin:2.6.0")
+
+    // General dependencies
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.3.30")
     implementation("org.slf4j:slf4j-simple:1.7.25")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.9.8")
 

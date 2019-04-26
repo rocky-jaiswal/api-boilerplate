@@ -1,14 +1,17 @@
-package de.rockyj.wortschatz.handlers
+package de.rockyj.handlers
 
 import de.rockyj.wortschatz.configuration.Authentication
-import io.javalin.Context
+import org.http4k.core.*
+import org.http4k.format.Jackson
+import org.http4k.format.Jackson.json
 import org.slf4j.LoggerFactory
 
 class AuthHandler(private val authentication: Authentication) {
     private val logger = LoggerFactory.getLogger(this::class.java.name)
+    private val json = Jackson
 
-    fun create(ctx: Context): Context {
+    fun create(request: Request): Response {
         logger.info("Received request for auth path ...")
-        return ctx.json(mapOf("token" to authentication.createToken()))
+        return Response(Status.OK).with(Body.json().toLens() of json.obj("token" to json.string(authentication.createToken())))
     }
 }

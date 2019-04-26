@@ -27,7 +27,9 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.4.0")
 
     // Web framework
-    implementation("io.javalin:javalin:2.6.0")
+    implementation("org.http4k:http4k-core:3.139.0")
+    implementation("org.http4k:http4k-server-jetty:3.139.0")
+    implementation("org.http4k:http4k-format-jackson:3.139.0")
 
     // General dependencies
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.3.30")

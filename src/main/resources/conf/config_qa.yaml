@@ -1,2 +1,4 @@
 server:
-  port: 8090
+  port: 8080
+  maxPoolSize: 10
+  corsOrigin: "http://localhost:3000"

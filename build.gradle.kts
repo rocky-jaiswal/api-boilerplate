@@ -47,7 +47,7 @@ dependencies {
     implementation("net.logstash.logback:logstash-logback-encoder:5.2")
 
     // DB Stuff
-    implementation("org.postgresql:postgresql:42.2.5")
+    implementation("org.xerial:sqlite-jdbc:3.27.2")
     implementation("com.zaxxer:HikariCP:3.3.0")
     implementation("org.jdbi:jdbi3-core:3.6.0")
     implementation("org.jdbi:jdbi3-sqlobject:3.6.0")
@@ -61,6 +61,9 @@ dependencies {
 
     // DB Testing
     testImplementation("org.testcontainers:postgresql:1.10.6")
+
+    // JWT
+    implementation("com.auth0:java-jwt:3.8.0")
 }
 
 application {

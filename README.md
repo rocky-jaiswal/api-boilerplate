@@ -8,7 +8,7 @@ Simple Javalin + Kotlin based API boilerplate. Please note that this project is 
 - Build + dependency management tool (e.g. npm, gradle) ✔️
 - Testing
   - Unit ✔️
-    - Usually needs a mocking library
+    - Usually needs a mocking library (Mockk)
   - Integration (request / db level) ✔️ 
   - Contract / Pact
   - CI testing with test DB etc. ✔️
@@ -18,8 +18,8 @@ Simple Javalin + Kotlin based API boilerplate. Please note that this project is 
   - Local, QA, Production
 - Secrets management ✔️
   - Also may vary depending on env.
-- CORS in development
-  - Also may vary depending on env.
+- CORS in development ✔️
+  - Also may vary depending on env. ✔️
 - Hot reload in development (automatic restart)
 - JSON + XML parsing / generation
 - HTTP client (for service level integration) or maybe Prot. Buffer / gRPC
@@ -34,8 +34,8 @@ Simple Javalin + Kotlin based API boilerplate. Please note that this project is 
 - Code quality analysis / measurement
 - Dependency Injection (if applicable, for better testable code) ✔️
 - Authenticated paths / Non-Authenticated paths
-- JWT Authentication
-- Authorization
+- JWT Authentication ✔️
+- Authorization ✔️
 - API documentation / spec (e.g. openAPI / Swagger)
 - Docker + Docker-Compose setup
 - Horizontal scaling strategy (API should be stateless for example)

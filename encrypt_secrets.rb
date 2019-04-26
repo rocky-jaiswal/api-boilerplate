@@ -4,6 +4,8 @@ require 'securerandom'
 require 'openssl'
 require 'base64'
 
+environment = ARGV[0] || 'development'
+
 r1 = SecureRandom.hex(32)[0, 32]
 r2 = SecureRandom.hex(16)[0, 16]
 
@@ -23,7 +25,7 @@ File.write('src/main/resources/secrets/secrets.enc', Base64.encode64(encrypted))
 
 # Write secrets to properties file
 properties = <<~HEREDOC
-                   systemProp.application.environment=development
+                   systemProp.application.environment=#{environment}
                    systemProp.application.key=#{r1}
                    systemProp.application.iv=#{r2}
                 HEREDOC

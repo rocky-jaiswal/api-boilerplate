@@ -11,8 +11,6 @@ class DataSource(configuration: GenericConfiguration, secrets: GenericConfigurat
 
     init {
         config.jdbcUrl = dbURL
-        config.username = secrets.get<String>("username")
-        config.password = secrets.get<String>("password")
         config.maximumPoolSize = configuration.get("maxPoolSize") as Int
     }
 

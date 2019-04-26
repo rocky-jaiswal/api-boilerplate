@@ -7,6 +7,7 @@ import java.io.InputStream
 object ApplicationConfiguration : ConfigSpec("server") {
     val port by required<Int>()
     val maxPoolSize by required<Int>()
+    val corsOrigin by required<String>()
 }
 
 class Configuration : GenericConfiguration {

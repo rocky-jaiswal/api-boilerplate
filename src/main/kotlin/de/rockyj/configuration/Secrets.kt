@@ -12,7 +12,9 @@ class Secrets : GenericConfiguration {
     private val keyBytes = System.getProperty("application.key").toByteArray()
     private val ivBytes = System.getProperty("application.iv").toByteArray()
 
-    private val byteArray = this::class.java.classLoader.getResource("secrets/secrets.enc").readBytes()
+    private val byteArray: ByteArray by lazy {
+        this::class.java.classLoader.getResource("secrets/secrets.enc").readBytes()
+    }
 
     private val iv = IvParameterSpec(ivBytes)
     private val keySpec = SecretKeySpec(keyBytes, "AES")

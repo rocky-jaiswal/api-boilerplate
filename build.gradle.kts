@@ -23,9 +23,6 @@ dependencies {
     // Use the Kotlin JDK 8 standard library.
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
-    // Use junit 5
-    testImplementation("org.junit.jupiter:junit-jupiter:5.4.0")
-
     // Web framework
     implementation("org.http4k:http4k-core:3.139.0")
     implementation("org.http4k:http4k-server-jetty:3.139.0")
@@ -58,14 +55,17 @@ dependencies {
     implementation("org.jdbi:jdbi3-kotlin-sqlobject:3.6.0")
     implementation("org.jdbi:jdbi3-sqlite:3.6.0")
 
+    // JWT
+    implementation("com.auth0:java-jwt:3.8.0")
+
     // DB Migration
     implementation("org.flywaydb:flyway-core:5.2.4")
 
+    // Testing - JUnit 5
+    testImplementation("org.junit.jupiter:junit-jupiter:5.4.0")
+
     // DB Testing
     testImplementation("org.testcontainers:postgresql:1.10.6")
-
-    // JWT
-    implementation("com.auth0:java-jwt:3.8.0")
 }
 
 application {

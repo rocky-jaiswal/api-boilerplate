@@ -35,7 +35,7 @@ Simple Javalin + Kotlin based API boilerplate. Please note that this project is 
 - Dependency Injection (if applicable, for better testable code) ✔️
 - Authenticated paths / Non-Authenticated paths
 - JWT Authentication ✔️
-- Authorization ✔️
+- Authorization
 - API documentation / spec (e.g. openAPI / Swagger)
 - Docker + Docker-Compose setup
 - Horizontal scaling strategy (API should be stateless for example)

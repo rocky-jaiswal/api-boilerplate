@@ -12,11 +12,9 @@ object ApplicationConfiguration : ConfigSpec("server") {
 
 class Configuration : GenericConfiguration {
 
-    var content: InputStream
-
-    init {
+    private val content: InputStream by lazy {
         val environment = System.getProperty("application.environment")
-        content = this::class.java.classLoader.getResource("conf/config_$environment.yaml").openStream()
+        this::class.java.classLoader.getResource("conf/config_$environment.yaml").openStream()
     }
 
     private fun readConfiguration(): Config {

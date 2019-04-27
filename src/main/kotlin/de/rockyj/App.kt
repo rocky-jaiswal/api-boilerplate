@@ -2,6 +2,7 @@ package de.rockyj
 
 import de.rockyj.configuration.*
 import de.rockyj.filters.AuthFilter
+import de.rockyj.filters.CorsFilter
 import de.rockyj.handlers.AuthHandler
 import de.rockyj.handlers.RootHandler
 import de.rockyj.handlers.UsersHandler
@@ -18,15 +19,22 @@ import org.koin.standalone.StandAloneContext
 import org.koin.standalone.get
 
 val mainModule = module {
+    // Configuration
     single<GenericConfiguration>("configuration") { Configuration()  }
     single<GenericConfiguration>("secrets") { Secrets() }
+
     single { Authentication(get(name = "secrets")) }
 
+    // Filters
     single { AuthFilter(get()) }
+    single { CorsFilter() }
 
+    // DB
     single { DataSource(get(name="configuration"), get(name="secrets")) }
     single { DB(get()) }
     single { UserRepository(get()) }
+
+    // Services
     single { UserService(get()) }
 
     // Handlers
@@ -36,39 +44,16 @@ val mainModule = module {
     single { Router() }
 }
 
-internal enum class AppRole {
-    ANYONE, USER
-}
-
-
 object App : KoinComponent {
     fun init(): RoutingHttpHandler {
         // Migrate the DB
         val dataSource: DataSource = get()
         Flyway.configure().dataSource(dataSource.getHikariDataSource()).load().migrate()
 
+        // Setup routing
         val router: Router = get()
         return router.setup()
     }
-
-//    fun getUserRole(ctx: Context) : Role {
-//        val authentication: Authentication = get()
-//        val authenticated = authentication.verifyToken(ctx.header("Authorization") ?: "")
-//        return if(authenticated){
-//            AppRole.USER
-//        } else {
-//            AppRole.ANYONE
-//        }
-//    }
-//
-//    fun checkAccess(handler: Handler, ctx: Context, permittedRoles: Set<Role>) {
-//        val userRole = getUserRole(ctx)
-//        if (permittedRoles.contains(userRole)) {
-//            handler.handle(ctx)
-//        } else {
-//            ctx.status(401).result("Unauthorized")
-//        }
-//    }
 }
 
 fun main() {
@@ -77,10 +62,8 @@ fun main() {
 
     // Server configuration
     val port = Configuration().get("port") as Int
-    val corsOrigin = Configuration().get("corsOrigin") as String
 
-    val app = App.init()
-
-    app.asServer(Jetty(port)).start()
+    // Start server
+    App.init().asServer(Jetty(port)).start()
 }
 

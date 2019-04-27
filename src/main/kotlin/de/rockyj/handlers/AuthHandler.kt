@@ -1,6 +1,6 @@
 package de.rockyj.handlers
 
-import de.rockyj.wortschatz.configuration.Authentication
+import de.rockyj.configuration.Authentication
 import org.http4k.core.*
 import org.http4k.format.Jackson
 import org.http4k.format.Jackson.json
@@ -12,6 +12,8 @@ class AuthHandler(private val authentication: Authentication) {
 
     fun create(request: Request): Response {
         logger.info("Received request for auth path ...")
-        return Response(Status.OK).with(Body.json().toLens() of json.obj("token" to json.string(authentication.createToken())))
+        val token = json.string(authentication.createToken())
+        return Response(Status.OK)
+            .with(Body.json().toLens() of json.obj("token" to token))
     }
 }

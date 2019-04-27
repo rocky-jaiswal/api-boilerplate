@@ -1,13 +1,13 @@
 package de.rockyj
 
 import de.rockyj.configuration.*
+import de.rockyj.filters.AuthFilter
 import de.rockyj.handlers.AuthHandler
 import de.rockyj.handlers.RootHandler
 import de.rockyj.handlers.UsersHandler
 import de.rockyj.repositories.DB
 import de.rockyj.repositories.UserRepository
 import de.rockyj.services.UserService
-import de.rockyj.wortschatz.configuration.Authentication
 import org.flywaydb.core.Flyway
 import org.http4k.routing.RoutingHttpHandler
 import org.http4k.server.Jetty
@@ -21,6 +21,8 @@ val mainModule = module {
     single<GenericConfiguration>("configuration") { Configuration()  }
     single<GenericConfiguration>("secrets") { Secrets() }
     single { Authentication(get(name = "secrets")) }
+
+    single { AuthFilter(get()) }
 
     single { DataSource(get(name="configuration"), get(name="secrets")) }
     single { DB(get()) }

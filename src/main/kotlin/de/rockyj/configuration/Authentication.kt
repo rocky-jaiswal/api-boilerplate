@@ -1,8 +1,7 @@
-package de.rockyj.wortschatz.configuration
+package de.rockyj.configuration
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
-import de.rockyj.configuration.GenericConfiguration
 
 const val DUMMY_USER = "user101"
 

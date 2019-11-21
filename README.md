@@ -41,3 +41,16 @@ Simple Javalin + Kotlin based API boilerplate. Please note that this project is 
 - Horizontal scaling strategy (API should be stateless for example)
 - Data pagination
 
+
+# UI Boilerplate
+
+- UI Components (reusable / library)
+- State management
+- Layout / Styling / Theming
+- i18n
+- Routing
+- Linting
+- Unit testing
+- Integration testing
+- CI / CD
+- Configuration for multiple environments

@@ -48,9 +48,14 @@ Simple Javalin + Kotlin based API boilerplate. Please note that this project is 
 - State management
 - Layout / Styling / Theming
 - i18n
+- Form validation
 - Routing
+- Backend communication (REST / GraphQL)
 - Linting
+- Editor setup (Prettier + Editor Config)
 - Unit testing
 - Integration testing
+- Building (CRA does this)
 - CI / CD
 - Configuration for multiple environments
+- Deployment (S3 + CDN + Protection)

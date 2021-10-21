@@ -40,3 +40,4 @@ Simple Javalin + Kotlin based API boilerplate. Please note that this project is 
 - Docker + Docker-Compose setup
 - Horizontal scaling strategy (API should be stateless for example)
 - Data pagination
+- Metrics (e.g req per sec, response time, custom metrics)
